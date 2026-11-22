@@ -1,0 +1,242 @@
+#VRML_SIM R2025a utf8
+WorldInfo {
+  basicTimeStep 32
+  title "WATER OS - Adaptive Climate-Resilient Water Recovery"
+}
+Viewpoint {
+  orientation 0.12 0.98 0.14 1.48
+  position 0 7.5 11.5
+  description "WATER OS treatment line overview"
+}
+TexturedBackground { }
+TexturedBackgroundLight { }
+RectangleArena {
+  floorSize 12 5
+  floorTileSize 1 1
+}
+# Ground labels are represented by colored stage markers and equipment.
+DEF RAW_TANK Solid {
+  translation -3.7 0.72 0
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.20 0.34 0.42 transparency 0.28 roughness 0.25 metalness 0.1 }
+      geometry Box { size 1.35 1.35 1.25 }
+    }
+    Transform {
+      translation 0 0.12 0
+      children [ Shape { appearance PBRAppearance { baseColor 0.35 0.25 0.12 transparency 0.18 } geometry Box { size 1.12 0.85 1.02 } } ]
+    }
+  ]
+  name "Raw stormwater intake tank"
+  boundingObject Box { size 1.35 1.35 1.25 }
+}
+DEF SENSOR_BAY Solid {
+  translation -1.75 0.45 0
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.10 0.45 0.72 roughness 0.3 } geometry Box { size 0.95 0.85 0.95 } }
+    Transform { translation 0 0.53 0 children [ Shape { appearance PBRAppearance { baseColor 0.85 0.90 0.95 } geometry Cylinder { radius 0.08 height 0.38 } } ] }
+    Transform { translation -0.25 0.53 0.25 children [ Shape { appearance PBRAppearance { baseColor 0.12 0.75 0.85 } geometry Cylinder { radius 0.055 height 0.34 } } ] }
+    Transform { translation 0.25 0.53 -0.25 children [ Shape { appearance PBRAppearance { baseColor 0.15 0.85 0.45 } geometry Cylinder { radius 0.055 height 0.34 } } ] }
+  ]
+  name "Multi-parameter sensor bay"
+  boundingObject Box { size 0.95 0.85 0.95 }
+}
+DEF ADAPTIVE_FILTER Solid {
+  translation 0.15 0.72 0
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.22 0.52 0.72 transparency 0.18 roughness 0.28 } geometry Box { size 1.45 1.35 1.25 } }
+    Transform { translation 0 0.10 0 children [ Shape { appearance PBRAppearance { baseColor 0.78 0.70 0.48 } geometry Box { size 1.20 0.32 1.02 } } ] }
+    Transform { translation 0 -0.25 0 children [ Shape { appearance PBRAppearance { baseColor 0.22 0.22 0.20 } geometry Box { size 1.20 0.22 1.02 } } ] }
+    Transform { translation 0 0.40 0 children [ Shape { appearance PBRAppearance { baseColor 0.20 0.62 0.83 } geometry Box { size 1.20 0.28 1.02 } } ] }
+  ]
+  name "Adaptive multi-media filtration module"
+  boundingObject Box { size 1.45 1.35 1.25 }
+}
+DEF BIO_STAGE Solid {
+  translation 2.15 0.72 0
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.18 0.52 0.36 transparency 0.20 roughness 0.25 } geometry Box { size 1.35 1.35 1.25 } }
+    Transform { translation 0 -0.18 0 children [ Shape { appearance PBRAppearance { baseColor 0.38 0.68 0.35 } geometry Box { size 1.12 0.55 1.02 } } ] }
+    Transform { translation 0 0.30 0 children [ Shape { appearance PBRAppearance { baseColor 0.55 0.78 0.50 } geometry Box { size 1.12 0.24 1.02 } } ] }
+  ]
+  name "Biological polishing stage representation"
+  boundingObject Box { size 1.35 1.35 1.25 }
+}
+DEF REUSE_TANK Solid {
+  translation 4.15 0.72 0
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.12 0.55 0.78 transparency 0.22 roughness 0.2 } geometry Box { size 1.35 1.35 1.25 } }
+    Transform { translation 0 0.10 0 children [ Shape { appearance PBRAppearance { baseColor 0.10 0.58 0.88 transparency 0.12 } geometry Box { size 1.12 0.90 1.02 } } ] }
+  ]
+  name "Treated water reuse storage"
+  boundingObject Box { size 1.35 1.35 1.25 }
+}
+# Overhead transfer pipe and short branch lines.
+DEF MAIN_PIPE Solid {
+  translation 0 1.62 0
+  children [
+    Shape {
+      appearance PBRAppearance { baseColor 0.35 0.48 0.55 metalness 0.65 roughness 0.25 }
+      geometry Cylinder { radius 0.12 height 8.9 }
+    }
+  ]
+  name "Main transfer pipe"
+  boundingObject Cylinder { radius 0.12 height 8.9 }
+  rotation 0 0 1 1.5708
+}
+# Pump housing and rotating impeller indicator.
+DEF PUMP_BODY Solid {
+  translation -2.75 1.62 0
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.95 0.48 0.08 metalness 0.35 } geometry Cylinder { radius 0.28 height 0.42 } }
+    Transform { translation 0 0.24 0 children [ Shape { appearance PBRAppearance { baseColor 0.95 0.85 0.25 } geometry Cylinder { radius 0.10 height 0.10 } } ] }
+  ]
+  name "Transfer pump"
+  boundingObject Cylinder { radius 0.28 height 0.42 }
+}
+DEF VALVE Solid {
+  translation -0.95 1.62 0
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.82 0.18 0.16 } geometry Box { size 0.34 0.48 0.34 } }
+    Transform { translation 0 0.34 0 children [ Shape { appearance PBRAppearance { baseColor 0.90 0.90 0.90 } geometry Cylinder { radius 0.06 height 0.42 } } ] }
+  ]
+  name "Adaptive routing valve"
+  boundingObject Box { size 0.34 0.48 0.34 }
+}
+# Solar canopy and panel.
+DEF SOLAR_PANEL Solid {
+  translation 3.55 2.15 -1.45
+  rotation 1 0 0 -0.28
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.05 0.16 0.34 metalness 0.45 roughness 0.22 } geometry Box { size 1.55 0.08 0.95 } }
+    Transform { translation 0 0.05 0 children [ Shape { appearance PBRAppearance { baseColor 0.15 0.50 0.82 } geometry Box { size 1.42 0.025 0.82 } } ] }
+  ]
+  name "Solar-assisted power panel"
+  boundingObject Box { size 1.55 0.08 0.95 }
+}
+# Small environmental monitoring mast for rainfall / ambient conditions.
+DEF CLIMATE_MAST Solid {
+  translation -4.8 1.15 -1.45
+  children [
+    Shape { appearance PBRAppearance { baseColor 0.70 0.75 0.80 metalness 0.4 } geometry Cylinder { radius 0.045 height 1.8 } }
+    Transform { translation 0 0.75 0 children [ Shape { appearance PBRAppearance { baseColor 0.18 0.65 0.90 } geometry Sphere { radius 0.18 } } ] }
+    Transform { translation 0 0.40 0 children [ Shape { appearance PBRAppearance { baseColor 0.90 0.75 0.10 } geometry Box { size 0.34 0.08 0.34 } } ] }
+  ]
+  name "Climate and rainfall monitoring mast"
+  boundingObject Cylinder { radius 0.045 height 1.8 }
+}
+# Flow particles are moved by the Supervisor controller to show water transfer.
+DEF FLOW_00 Solid {
+  translation -4.350 1.620 0.020
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 1"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_01 Solid {
+  translation -4.510 1.620 0.020
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 2"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_02 Solid {
+  translation -4.670 1.620 0.020
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 3"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_03 Solid {
+  translation -4.830 1.620 0.020
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 4"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_04 Solid {
+  translation -4.990 1.620 0.020
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 5"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_05 Solid {
+  translation -5.150 1.620 0.020
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 6"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_06 Solid {
+  translation -4.350 1.620 0.120
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 7"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_07 Solid {
+  translation -4.510 1.620 0.120
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 8"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_08 Solid {
+  translation -4.670 1.620 0.120
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 9"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_09 Solid {
+  translation -4.830 1.620 0.120
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 10"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_10 Solid {
+  translation -4.990 1.620 0.120
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 11"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_11 Solid {
+  translation -5.150 1.620 0.120
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 12"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_12 Solid {
+  translation -4.350 1.620 0.220
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 13"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_13 Solid {
+  translation -4.510 1.620 0.220
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 14"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_14 Solid {
+  translation -4.670 1.620 0.220
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 15"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_15 Solid {
+  translation -4.830 1.620 0.220
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 16"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_16 Solid {
+  translation -4.990 1.620 0.220
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 17"
+  boundingObject Sphere { radius 0.055 }
+}
+DEF FLOW_17 Solid {
+  translation -5.150 1.620 0.220
+  children [ Shape { appearance PBRAppearance { baseColor 0.10 0.65 0.95 transparency 0.08 roughness 0.15 } geometry Sphere { radius 0.055 } } ]
+  name "Animated water parcel 18"
+  boundingObject Sphere { radius 0.055 }
+}
+
+Robot {
+  name "WATER OS supervisory controller"
+  supervisor TRUE
+  controller "water_os_controller"
+}
